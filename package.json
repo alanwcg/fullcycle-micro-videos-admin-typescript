@@ -4,8 +4,8 @@
   "description": "Projeto prático do curso Full Cycle 3.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "jest --runInBand",
+    "test:watch": "npm run test -- --watch",
     "test:verbose": "jest --verbose",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"

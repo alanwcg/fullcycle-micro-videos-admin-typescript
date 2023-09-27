@@ -1,5 +1,5 @@
 import { Entity } from '../../../domain/entity'
-import { NotFoundError } from '../../../domain/errors/not-found-error'
+import { NotFoundError } from '../../../domain/errors/not-found.error'
 import { IRepository } from '../../../domain/repository/repository-interface'
 import { ValueObject } from '../../../domain/value-object'
 
