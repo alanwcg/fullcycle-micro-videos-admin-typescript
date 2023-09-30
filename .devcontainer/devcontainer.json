@@ -34,7 +34,8 @@
         "albert.tabout",
         "eamodio.gitlens",
         "Orta.vscode-jest",
-        "firsttris.vscode-jest-runner"
+        "firsttris.vscode-jest-runner",
+        "jeff-hykin.better-dockerfile-syntax"
       ]
     }
   }
