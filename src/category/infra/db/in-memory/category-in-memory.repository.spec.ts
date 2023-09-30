@@ -1,7 +1,7 @@
 import { Category } from '../../../domain/category.entity'
 import { CategoryInMemoryRepository } from './category-in-memory.repository'
 
-describe('CategoryInMemoryRepository', () => {
+describe('CategoryInMemoryRepository Unit Tests', () => {
   let repository: CategoryInMemoryRepository
 
   beforeEach(() => (repository = new CategoryInMemoryRepository()))

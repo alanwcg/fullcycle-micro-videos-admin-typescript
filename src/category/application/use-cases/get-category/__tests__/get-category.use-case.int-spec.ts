@@ -4,17 +4,17 @@ import { setupSequelize } from '../../../../../shared/infra/testing/helpers'
 import { Category } from '../../../../domain/category.entity'
 import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository'
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model'
-import { DeleteCategoryUseCase } from '../../delete-category.use-case'
+import { GetCategoryUseCase } from '../get-category.use-case'
 
-describe('DeleteCategoryUseCase Integration Tests', () => {
-  let useCase: DeleteCategoryUseCase
+describe('GetCategoryUseCase Integration Tests', () => {
+  let useCase: GetCategoryUseCase
   let repository: CategorySequelizeRepository
 
   setupSequelize({ models: [CategoryModel] })
 
   beforeEach(() => {
     repository = new CategorySequelizeRepository(CategoryModel)
-    useCase = new DeleteCategoryUseCase(repository)
+    useCase = new GetCategoryUseCase(repository)
   })
 
   it('should throw error when entity is not found', async () => {
@@ -24,13 +24,19 @@ describe('DeleteCategoryUseCase Integration Tests', () => {
     )
   })
 
-  it('should delete a category', async () => {
+  it('should get a category', async () => {
     const entity = Category.fake().aCategory().build()
     await repository.insert(entity)
 
-    await useCase.execute({
+    const output = await useCase.execute({
       id: entity.category_id.id,
     })
-    await expect(repository.findById(entity.category_id)).resolves.toBeNull()
+    expect(output).toStrictEqual({
+      id: entity.category_id.id,
+      name: entity.name,
+      description: entity.description,
+      is_active: entity.is_active,
+      created_at: entity.created_at,
+    })
   })
 })

@@ -2,12 +2,6 @@ import { Uuid } from '../../../shared/domain/value-objects/uuid.vo'
 import { Category } from '../category.entity'
 
 describe('Category Unit Tests', () => {
-  let validateSpy: jest.SpyInstance<void, [entity: Category]>
-
-  beforeEach(() => {
-    validateSpy = jest.spyOn(Category, 'validate')
-  })
-
   describe('constructor', () => {
     it('should create a category with default values', () => {
       const category = new Category({
@@ -62,7 +56,6 @@ describe('Category Unit Tests', () => {
       expect(category.description).toBeNull()
       expect(category.is_active).toBe(true)
       expect(category.created_at).toBeInstanceOf(Date)
-      expect(validateSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should create a category with description', () => {
@@ -76,7 +69,6 @@ describe('Category Unit Tests', () => {
       expect(category.description).toBe('Movie description')
       expect(category.is_active).toBe(true)
       expect(category.created_at).toBeInstanceOf(Date)
-      expect(validateSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should create a category with is_active', () => {
@@ -90,7 +82,6 @@ describe('Category Unit Tests', () => {
       expect(category.description).toBeNull()
       expect(category.is_active).toBe(false)
       expect(category.created_at).toBeInstanceOf(Date)
-      expect(validateSpy).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -118,11 +109,12 @@ describe('Category Unit Tests', () => {
     const category = Category.create({
       name: 'Movie',
     })
+    const validateSpy = jest.spyOn(category, 'validate')
 
     category.changeName('other name')
 
     expect(category.name).toBe('other name')
-    expect(validateSpy).toHaveBeenCalledTimes(2)
+    expect(validateSpy).toHaveBeenCalledTimes(1)
   })
 
   it('should change description', () => {
@@ -133,7 +125,6 @@ describe('Category Unit Tests', () => {
     category.changeDescription('some description')
 
     expect(category.description).toBe('some description')
-    expect(validateSpy).toHaveBeenCalledTimes(2)
   })
 
   it('should update category', () => {

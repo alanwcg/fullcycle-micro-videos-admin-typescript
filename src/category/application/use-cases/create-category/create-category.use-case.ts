@@ -1,0 +1,29 @@
+import { IUseCase } from '../../../../shared/application/use-case.interface'
+import { EntityValidationError } from '../../../../shared/domain/validators/validation.error'
+import { Category } from '../../../domain/category.entity'
+import { ICategoryRepository } from '../../../domain/category.repository'
+import { CreateCategoryInput } from './create-category-input'
+import {
+  CategoryOutput,
+  CategoryOutputMapper,
+} from '../common/category-output.mapper'
+
+export type CreateCategoryOutput = CategoryOutput
+
+export class CreateCategoryUseCase
+  implements IUseCase<CreateCategoryInput, CreateCategoryOutput>
+{
+  constructor(private readonly categoryRepository: ICategoryRepository) {}
+
+  async execute(input: CreateCategoryInput): Promise<CreateCategoryOutput> {
+    const category = Category.create(input)
+
+    if (category.notification.hasErrors()) {
+      throw new EntityValidationError(category.notification.toJSON())
+    }
+
+    await this.categoryRepository.insert(category)
+
+    return CategoryOutputMapper.toOutput(category)
+  }
+}
