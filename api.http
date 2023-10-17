@@ -1,0 +1,15 @@
+@base_url = http://localhost:3000
+
+# @name create_category
+POST {{base_url}}/categories
+Content-Type: application/json
+
+{
+  "name": "Category 1",
+  "description": "Description 1"
+}
+
+###
+
+# @name search_categories
+GET {{base_url}}/categories

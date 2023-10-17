@@ -18,6 +18,9 @@ const config: Config = {
   testEnvironment: 'node',
   clearMocks: true,
   setupFilesAfterEnv: ['./core/shared/infra/testing/expect-helpers.ts'],
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/../$1',
+  },
 };
 
 export default config;

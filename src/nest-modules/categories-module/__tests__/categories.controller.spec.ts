@@ -1,15 +1,15 @@
-import { SortDirection } from '@core/shared/domain/repository/search-params';
-import { CreateCategoryOutput } from '@core/category/application/use-cases/create-category/create-category.use-case';
-import { ListCategoriesOutput } from '@core/category/application/use-cases/list-categories/list-categories.use-case';
-import { UpdateCategoryInput } from '@core/category/application/use-cases/update-category/update-category-input';
-import { UpdateCategoryOutput } from '@core/category/application/use-cases/update-category/update-category.use-case';
 import { CategoriesController } from '../categories.controller';
 import { CreateCategoryDto } from '../dto/create-category.dto';
-import { GetCategoryOutput } from '@core/category/application/use-cases/get-category/get-category.use-case';
 import {
   CategoryPresenter,
   CategoryCollectionPresenter,
 } from '../categories.presenter';
+import { CreateCategoryOutput } from '@/src/core/category/application/use-cases/create-category/create-category.use-case';
+import { GetCategoryOutput } from '@/src/core/category/application/use-cases/get-category/get-category.use-case';
+import { ListCategoriesOutput } from '@/src/core/category/application/use-cases/list-categories/list-categories.use-case';
+import { UpdateCategoryInput } from '@/src/core/category/application/use-cases/update-category/update-category-input';
+import { UpdateCategoryOutput } from '@/src/core/category/application/use-cases/update-category/update-category.use-case';
+import { SortDirection } from '@/src/core/shared/domain/repository/search-params';
 
 describe('CategoriesController Unit Tests', () => {
   let controller: CategoriesController;
